@@ -1,0 +1,100 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+    @font-face {
+        font-family: 'AMX';
+        src: url('./assets/fonts/AMX-Regular.eot');
+        src: url('./assets/fonts/AMX-Regular.eot?#iefix') format('embedded-opentype'),
+            url('./assets/fonts/AMX-Regular.woff2') format('woff2'),
+            url('./assets/fonts/AMX-Regular.woff') format('woff'),
+            url('./assets/fonts/AMX-Regular.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+      
+    @font-face {
+        font-family: 'AMX';
+        src: url('./assets/fonts/AMX-Bold.eot');
+        src: url('./assets/fonts/AMX-Bold.eot?#iefix') format('embedded-opentype'),
+            url('./assets/fonts/AMX-Bold.woff2') format('woff2'),
+            url('./assets/fonts/AMX-Bold.woff') format('woff'),
+            url('./assets/fonts/AMX-Bold.ttf') format('truetype');
+        font-weight: bold;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Roboto';
+        src: url('./assets/fonts/Roboto-Regular.eot');
+        src: url('./assets/fonts/Roboto-Regular.eot?#iefix') format('embedded-opentype'),
+            url('./assets/fonts/Roboto-Regular.woff2') format('woff2'),
+            url('./assets/fonts/Roboto-Regular.woff') format('woff'),
+            url('./assets/fonts/Roboto-Regular.ttf') format('truetype');
+        font-weight: normal;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Roboto';
+        src: url('./assets/fonts/Roboto-Medium.eot');
+        src: url('./assets/fonts/Roboto-Medium.eot?#iefix') format('embedded-opentype'),
+            url('./assets/fonts/Roboto-Medium.woff2') format('woff2'),
+            url('./assets/fonts/Roboto-Medium.woff') format('woff'),
+            url('./assets/fonts/Roboto-Medium.ttf') format('truetype');
+        font-weight: 500;
+        font-style: normal;
+        font-display: swap;
+    }
+
+    @font-face {
+        font-family: 'Roboto';
+        src: url('./assets/fonts/Roboto-Bold.eot');
+        src: url('./assets/fonts/Roboto-Bold.eot?#iefix') format('embedded-opentype'),
+            url('./assets/fonts/Roboto-Bold.woff2') format('woff2'),
+            url('./assets/fonts/Roboto-Bold.woff') format('woff'),
+            url('./assets/fonts/Roboto-Bold.ttf') format('truetype');
+        font-weight: bold;
+        font-style: normal;
+        font-display: swap;
+    }
+}
+
+.c-input{
+    @apply h-10 px-5 border border-grises-g400 !outline-none font-roboto text-base font-normal leading-5 text-grises-g800 placeholder-grises-g400 rounded-xl
+}
+
+.c-input.error {
+    @apply !border-estados-error
+}
+
+.c-input.success {
+    @apply !border-estados-exito
+}
+
+.c-dropdown {
+    @apply border px-2.5 border-grises-g400  font-roboto text-base font-normal leading-5 text-grises-g800 rounded-xl
+}
+
+.c-dropdown.disabled {
+    @apply !bg-grises-g300 
+}
+
+.c-btn-primary,.c-btn-primary:hover{
+    @apply w-80 h-10 py-3 font-roboto text-base font-medium text-center leading-5 text-white rounded-full bg-rojos-r625 
+}
+
+.c-btn-primary.c-btn-disabled,.c-btn-primary.c-btn-disabled:active {
+   @apply !bg-grises-g300 !text-grises-g800
+}
+
+.mat-mdc-dialog-container {
+    --mdc-dialog-container-shape: 10px;
+}
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

@@ -1,0 +1,12 @@
+
+input[type=checkbox]+.c-label-checkbox {
+    width: 21px;
+    height: 21px;
+    display: block;
+    background-image: url('assets/img/icons/c-check-unselected.svg');
+    background-size: cover;
+}
+
+input[type=checkbox]:checked+.c-label-checkbox {
+    background-image: url('assets/img/icons/c-check-selected.svg');
+}

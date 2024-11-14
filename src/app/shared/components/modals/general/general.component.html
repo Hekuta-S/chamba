@@ -1,0 +1,17 @@
+<div class="w-full flex flex-col p-6">
+    <div>
+        @if(data.status == "SUCCESS"){
+            <img src="assets/img/icons/c-alert.svg" class="mx-auto" alt="">
+        }
+
+        @if(data.status == "ERROR"){
+            <img src="assets/img/icons/c-error.svg" class="mx-auto" alt="">
+        }
+    </div>
+    <div class="mt-8 mb-10 text-base font-bold text-grises-g800 text-center" [innerHTML]="data.body">
+
+    </div>
+    <div class="flex justify-center">
+        <button type="submit" class="w-64 c-btn-primary" (click)="primaryButtonEvent()">{{data.textButtonDefault}}</button>
+    </div>
+</div>

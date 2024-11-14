@@ -1,0 +1,147 @@
+<div class="flex flex-col h-screen">
+    <app-header></app-header>
+    <div class="w-full flex-1 overflow-hidden">
+      <div class="h-full grid grid-cols-12 ">
+        <div class="hidden lg:col-span-7 lg:block relative">
+          <img src="./assets/img/bg.png" class="w-full h-full absolute inset-0" alt="">
+          <img src="./assets/img/logos/Logo_Claro_Negativo.svg" class="absolute top-7 left-5" alt="">
+          <div class="absolute bottom-20 left-5">
+            <p class="font-amx text-3xl font-bold text-white ">TV en vivo desde donde estés</p>
+            <p class="font-amx text-2xl font-normal text-white ">
+                Sin instalaciones, solo necesitas una conexión a internet. <br> Televisión en vivo desde tus dispositivos móviles
+            </p>
+          </div>
+        </div>
+        <div class="col-span-12 lg:col-span-5 max-h-screen overflow-y-auto">
+            <div class="w-full px-5 md:w-10/12 lg:px-0 lg:w-2/3 mx-auto mt-8">
+                <div>
+                    <h1 class="font-amx text-xl font-bold text-grises-g800 text-center">Regístrate para disfrutar <br> Claro TV+</h1>
+                </div>
+                <form [formGroup]="register" (ngSubmit)="onSubmit()">
+                    <div class="w-full flex flex-col mt-10">
+                        <label for="" class="font-roboto text-base font-normal text-grises-g800">Tipo de documento</label>
+                        <div class="w-full mt-2 c-dropdown" [ngClass]="{'disabled': isDisabledDropDown}">
+                            <div class="w-full h-10 px-2.5 flex items-center justify-between">
+                                {{getTextTypeDocument(register.get('tipoDocumento')?.value)}}
+                                <span>
+                                    
+                                </span>
+                                @if(isDisabledDropDown){
+                                    <img src="assets/img/icons/ci-angle-down-disabled.svg" class="cursor-pointer" [ngClass]="{'rotate-180': isOpenDropdown}" (click)="openDropdown()" alt="">
+                                }@else{
+                                    <img src="assets/img/icons/ci-angle-down.svg" class="cursor-pointer" [ngClass]="{'rotate-180': isOpenDropdown}" (click)="openDropdown()" alt="">
+                                }
+                                
+                            </div>
+                            @if(isOpenDropdown){
+                                <div class="w-full">
+                                    <div class="w-full py-2.5 border-t border-grises-g150">
+                                        <div class="px-2.5">
+                                            <label for="tipoDocumento">
+                                                Permiso por Protección Temporal
+                                            </label>
+                                            <input type="radio" class="hidden" name="tipoDocumento" id="tipoDocumento" formControlName="tipoDocumento" value="7">
+                                        </div>
+                                    </div>
+                                </div> 
+                            }     
+                        </div>
+                    </div>
+                    <div class="w-full flex flex-col mt-4">
+                        <label for="documento" class="font-roboto text-base font-normal text-grises-g800">Número de documento</label>
+                        <input type="text" id="documento" class="w-full mt-2 c-input" placeholder="Escribe tu número de documento" formControlName="documento" [ngClass]="{'error': isFormSubmited && f['documento'].errors}">
+                    </div>
+                    <div class="w-full flex flex-col mt-3">
+                        <label for="correo" class="font-roboto text-base font-normal text-grises-g800">Correo electrónico</label>
+                        <input type="text" id="correo" class="w-full mt-2 c-input" placeholder="Escribe tu correo electrónico" formControlName="correo" [ngClass]="{'error': isFormSubmited && f['correo'].errors}">
+                    </div>
+                    <div class="w-full flex flex-col mt-6 mb-4">
+                        <p class="font-roboto text-lg font-bold text-grises-g450">
+                            Crea tu nueva contraseña
+                        </p>
+                    </div>
+                    <div class="w-full flex flex-col">
+                        <label for="contrasena" class="font-roboto text-base font-normal text-grises-g800">Contraseña</label>
+                        <div class="w-full relative">
+                            <input [type]="viewPass1 ? 'text' : 'password'" id="contrasena" class="w-full mt-2 c-input" placeholder="Escribe tu contraseña" formControlName="contrasena" [ngClass]="{'error': isFormSubmited && f['contrasena'].errors, 'success': f['contrasena'].errors == null }" >
+                            <img [src]="viewPass1 ? 'assets/img/icons/c-show-password.svg' : 'assets/img/icons/c-show-password.svg'" class="absolute right-4 top-4" alt="icono ver contraseña" (click)="viewPass1 = !viewPass1">
+                        </div>                   
+                    </div>
+                    <div class="w-full flex flex-col mt-3">
+                        <label for="confirmContrasena" class="font-roboto text-base font-normal text-grises-g800">Confirmar contraseña</label>
+                        <div class="w-full relative">
+                            <input [type]="viewPass2 ? 'text' : 'password'" id="confirmContrasena" class="w-full mt-2 c-input" placeholder="Repite la contraseña" formControlName="confirmContrasena" [ngClass]="{'error': isFormSubmited && f['confirmContrasena'].errors, 'success': f['confirmContrasena'].errors == null }">
+                            <img [src]="viewPass2 ? 'assets/img/icons/c-show-password.svg' : 'assets/img/icons/c-show-password.svg'" class="absolute right-4 top-4" alt="icono ver contraseña" (click)="viewPass2 = !viewPass2">
+                        </div>  
+                        
+                    </div>
+                    
+                    @if (register.hasError('PasswordNoMatch')) {
+                        <p class="ms-8 mt-2 font-roboto text-sm font-normal text-estados-error">
+                            Las contraseñas no coinciden
+                        </p>
+                    }
+                    <div class="w-full flex flex-col mt-4 font-roboto text-sm font-normal text-grises-g425">
+                        <p class="mb-4">Tu contraseña debe tener:</p>
+                        <p class="flex" [ngClass]="{
+                            'text-verdes-v650': f['contrasena'].errors?.['min'] === true || f['contrasena'].errors == null,
+                            'text-estados-error': f['contrasena'].errors?.['min'] === false
+                        }">
+                        @if(f['contrasena'].errors == null){
+                            <img src="assets/img/icons/c-check-small.svg" class="me-1" alt="">
+                        }@else{
+                            *
+                        }
+                        Mínimo 8 caracteres
+                        </p>
+                        <p class="flex" [ngClass]="{
+                            'text-verdes-v650': f['contrasena'].errors?.['uppercase'] === true || f['contrasena'].errors == null,
+                            'text-estados-error': f['contrasena'].errors?.['uppercase'] === false
+                        }">
+                        @if(f['contrasena'].errors == null){
+                            <img src="assets/img/icons/c-check-small.svg" class="me-1" alt="">
+                        }@else{
+                            *
+                        }
+                        Al menos 1 letra mayúscula</p>
+                        <p class="flex" [ngClass]="{
+                            'text-verdes-v650': f['contrasena'].errors?.['cNumber'] === true || f['contrasena'].errors == null,
+                            'text-estados-error': f['contrasena'].errors?.['cNumber'] === false
+                        }">
+                        @if(f['contrasena'].errors == null){
+                            <img src="assets/img/icons/c-check-small.svg" class="me-1" alt="">
+                        }@else{
+                            *
+                        }
+                        Al menos 1 número</p>
+                        <p class="flex" [ngClass]="{
+                            'text-verdes-v650': f['contrasena'].errors?.['specialCharacter'] === true || f['contrasena'].errors == null,
+                            'text-estados-error': f['contrasena'].errors?.['specialCharacter'] === false
+                        }">
+                        @if(f['contrasena'].errors == null){
+                            <img src="assets/img/icons/c-check-small.svg" class="me-1" alt="">
+                        }@else{
+                            *
+                        }
+                        Mínimo un carácter especial (*.,-!"#$ )</p>
+                    </div>
+                    <div class="w-full flex flex-row items-start mt-6">
+                        <div>
+                            <input type="checkbox" class="hidden" name="" id="tyc" formControlName="terminos">
+                            <label class="c-label-checkbox" for="tyc"></label>     
+                        </div>
+                        <div class="ms-2">
+                            <p class="font-roboto text-sm font-normal text-grises-g550">
+                                Acepto <a class="text-estados-informacion underline">términos y condiciones de la tienda online</a> y autorizo el <a class="text-estados-informacion underline">tratamiento de datos personales de acuerdo a la política de Claro Colombia.</a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="w-full flex flex-col items-center justify-center mt-8 mb-14 lg:mb-28">
+                        <button type="submit" class="!w-full sm:!w-80 c-btn-primary" [disabled]="!register.valid" [ngClass]="{'c-btn-disabled': !register.valid}">Registrarse</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
